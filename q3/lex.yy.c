@@ -351,8 +351,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 7
-#define YY_END_OF_BUFFER 8
+#define YY_NUM_RULES 9
+#define YY_END_OF_BUFFER 10
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -362,8 +362,8 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[19] =
     {   0,
-        0,    0,    8,    5,    6,    5,    5,    5,    0,    0,
-        1,    0,    0,    4,    2,    1,    3,    0
+        0,    0,   10,    7,    8,    2,    7,    5,    6,    7,
+        1,    0,    5,    3,    0,    1,    4,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -371,12 +371,12 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    2,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    3,    1,    1,    1,    4,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    5,    6,    6,    6,
-        6,    6,    6,    6,    6,    6,    6,    1,    7,    1,
-        1,    1,    1,    1,    8,    8,    8,    8,    8,    8,
-        8,    8,    8,    8,    8,    8,    8,    8,    8,    8,
-        8,    8,    8,    8,    8,    8,    8,    8,    8,    8,
+        1,    1,    1,    1,    1,    3,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    4,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    1,    6,    1,
+        1,    1,    1,    1,    7,    7,    7,    7,    7,    7,
+        7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
+        7,    7,    7,    7,    7,    7,    7,    7,    7,    7,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
 
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -398,35 +398,35 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[9] =
+static const YY_CHAR yy_meta[8] =
     {   0,
-        1,    2,    1,    1,    1,    1,    1,    1
+        1,    2,    1,    1,    1,    1,    1
     } ;
 
 static const flex_int16_t yy_base[20] =
     {   0,
-        0,    0,   21,   22,   22,    6,   14,   10,    0,   12,
-        0,    7,    0,   22,    6,    0,    5,   22,    9
+        0,    0,   17,   18,   18,   18,   12,    4,   18,    5,
+        0,   10,    0,    9,    0,    0,    8,   18,   10
     } ;
 
 static const flex_int16_t yy_def[20] =
     {   0,
-       18,    1,   18,   18,   18,   18,   18,   18,    6,   18,
-       19,   18,    8,   18,   18,   19,   18,    0,   18
+       18,    1,   18,   18,   18,   18,   18,   18,   18,   18,
+       19,   18,    8,   18,   10,   19,   18,    0,   18
     } ;
 
-static const flex_int16_t yy_nxt[31] =
+static const flex_int16_t yy_nxt[26] =
     {   0,
-        4,    5,    4,    6,    7,    8,    4,    4,    9,   16,
-       17,   15,   17,   10,   12,   13,   14,   15,   11,   10,
-       18,    3,   18,   18,   18,   18,   18,   18,   18,   18
+        4,    5,    6,    7,    8,    9,   10,   12,   13,   14,
+       16,   15,   17,   14,   17,   11,   18,    3,   18,   18,
+       18,   18,   18,   18,   18
     } ;
 
-static const flex_int16_t yy_chk[31] =
+static const flex_int16_t yy_chk[26] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    6,   19,
-       17,   15,   12,    6,    8,    8,    8,   10,    7,   10,
-        3,   18,   18,   18,   18,   18,   18,   18,   18,   18
+        1,    1,    1,    1,    1,    1,    1,    8,    8,   10,
+       19,   10,   17,   14,   12,    7,    3,   18,   18,   18,
+       18,   18,   18,   18,   18
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -716,7 +716,7 @@ yy_match:
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 22 );
+		while ( yy_base[yy_current_state] != 18 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -745,32 +745,32 @@ YY_RULE_SETUP
 #line 23 "q3.l"
 {
     //fprintf(yyout, "\nComment");
-}
+};
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 27 "q3.l"
 {
-    if (state == 0 || state == 3 || state == -1) {
+    if (state == 0 || state == 5 || state == -1)
         state = 1;
+    else 
+        state = -1;
+};
+	YY_BREAK
+case 3:
+YY_RULE_SETUP
+#line 34 "q3.l"
+{
+    if (state == 1) {
+        state = 2;
     } else {
-        fprintf(yyout, "0\n");
-        exit(0);
-    }
-
-    int len = strlen(yytext);
-    int start = 0;
-    for (int i = 0; i < len; i++) {
-        if (isalpha(yytext[i])) {
-            len = len - i;
-            start = i;
-            break;
-        }
+        //ignoring
+        state = -1;
+        continue;
     }
 
     char temp[MAXCUSTOMERNAMELENGTH];
-    strncpy(temp, &yytext[start], len);
-    temp[len] = '\0';
+    strcpy(temp, yytext);
 
     int tempInd = -1;
     for (int i = 0; i < custSize; i++) {
@@ -794,78 +794,76 @@ YY_RULE_SETUP
 
 };
 	YY_BREAK
-case 3:
-YY_RULE_SETUP
-#line 71 "q3.l"
-{
-    if (state == 1 || state == 3) {
-        state = 2;
-    } else {
-        //ignoring
-        state = -1;
-        continue;
-    }
-
-
-    int d = (yytext[1] - '0') + 10 * (yytext[0] - '0');
-    int m = (yytext[4] - '0') + 10 * (yytext[3] - '0');
-
-
-    if (d > 30 || m > 12) {
-        fprintf(yyout, "0\n");
-        exit(0);
-    }
-    valInd = valsSize[custInd];
-    dds[custInd][valInd] = d;
-    mms[custInd][valInd] = m;
-    //fprintf(yyout, "%s %d %d %d\n", customers[custInd], d, m, valInd);
-};
-	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 95 "q3.l"
+#line 68 "q3.l"
 {
-    if (state == 2) {
+    if (state == 2 || state == 5) {
         state = 3;
     } else {
         //ignoring
         state = -1;
         continue;
     }
-    int temp = 0;
-    int len = strlen(yytext);
-    len -= 2; //last is ";';
-    int pow = 1;
-    while(len >= 0) {
-        temp = temp + pow * (yytext[len] - '0');
-        pow *= 10;
-        len--;
+
+    int d = (yytext[1] - '0') + 10 * (yytext[0] - '0');
+    int m = (yytext[4] - '0') + 10 * (yytext[3] - '0');
+
+    if (d > 30 || m > 12) {
+        fprintf(yyout, "0\n");
+        exit(0);
     }
+
+    valInd = valsSize[custInd];
+    dds[custInd][valInd] = d;
+    mms[custInd][valInd] = m;
+    //fprintf(yyout, "%s %d %d %d\n", customers[custInd], d, m, valInd);
+};
+	YY_BREAK
+case 5:
+YY_RULE_SETUP
+#line 91 "q3.l"
+{
+    if (state == 3) {
+        state = 4;
+    } else {
+        //ignoring
+        state = -1;
+        continue;
+    }
+    int temp = atoi(yytext);
     valInd = valsSize[custInd];
     vals[custInd][valInd] = temp;
     //fprintf(yyout, "%s %d %d\n", customers[custInd], temp, valInd);
     valsSize[custInd]++;
-}
-	YY_BREAK
-case 5:
-YY_RULE_SETUP
-#line 118 "q3.l"
-;
+};
 	YY_BREAK
 case 6:
-/* rule 6 can match eol */
 YY_RULE_SETUP
-#line 120 "q3.l"
+#line 106 "q3.l"
 {
-    state = 0;
-}
+    state = 5;
+};
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 124 "q3.l"
+#line 110 "q3.l"
+;
+	YY_BREAK
+case 8:
+/* rule 8 can match eol */
+YY_RULE_SETUP
+#line 112 "q3.l"
+{
+    state = 0;
+};
+	YY_BREAK
+case 9:
+YY_RULE_SETUP
+#line 116 "q3.l"
 ECHO;
 	YY_BREAK
-#line 869 "lex.yy.c"
+#line 867 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1870,7 +1868,8 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 124 "q3.l"
+#line 116 "q3.l"
+
 
 int yywrap() { 
     return 1;
@@ -1898,7 +1897,6 @@ int main() {
     int mxVal = -1;
     int mxCust = -1;
 
-
     //fprintf(yyout, "customers %d\n", custSize);
     for (int i = 0; i < custSize; i++) {
         //fprintf(yyout, "%s has %d vals\n", customers[i], valsSize[i]);
@@ -1906,9 +1904,10 @@ int main() {
             //fprintf(yyout, "{ %d/%d %d } ", dds[i][j], mms[i][j], vals[i][j]);
             if (dds[i][j] == d && mms[i][j] == m) {
                 numvalid++;
-                if (vals[i][j] > mxVal)
+                if (vals[i][j] > mxVal) {
                     mxVal = vals[i][j];
                     mxCust = i;
+                }
             }
         }
         //fprintf(yyout, "\n");
@@ -1918,3 +1917,4 @@ int main() {
     else 
         fprintf(yyout, "$%d$%s#", numvalid, customers[mxCust]);
 }
+

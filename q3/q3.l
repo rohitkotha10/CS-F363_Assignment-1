@@ -22,29 +22,26 @@
 %%
 "//".* {
     //fprintf(yyout, "\nComment");
-}
+};
 
-$(" ")*[A-Z]+[0-9]+ {
-    if (state == 0 || state == 3 || state == -1) {
+"$" {
+    if (state == 0 || state == 5 || state == -1)
         state = 1;
-    } else {
-        fprintf(yyout, "0\n");
-        exit(0);
-    }
+    else 
+        state = -1;
+};
 
-    int len = strlen(yytext);
-    int start = 0;
-    for (int i = 0; i < len; i++) {
-        if (isalpha(yytext[i])) {
-            len = len - i;
-            start = i;
-            break;
-        }
+[A-Z]+[0-9]+ {
+    if (state == 1) {
+        state = 2;
+    } else {
+        //ignoring
+        state = -1;
+        continue;
     }
 
     char temp[MAXCUSTOMERNAMELENGTH];
-    strncpy(temp, &yytext[start], len);
-    temp[len] = '\0';
+    strcpy(temp, yytext);
 
     int tempInd = -1;
     for (int i = 0; i < custSize; i++) {
@@ -69,59 +66,55 @@ $(" ")*[A-Z]+[0-9]+ {
 };
 
 [0-9]+"/"[0-9]+ {
-    if (state == 1 || state == 3) {
-        state = 2;
-    } else {
-        //ignoring
-        state = -1;
-        continue;
-    }
-
-
-    int d = (yytext[1] - '0') + 10 * (yytext[0] - '0');
-    int m = (yytext[4] - '0') + 10 * (yytext[3] - '0');
-
-
-    if (d > 30 || m > 12) {
-        fprintf(yyout, "0\n");
-        exit(0);
-    }
-    valInd = valsSize[custInd];
-    dds[custInd][valInd] = d;
-    mms[custInd][valInd] = m;
-    //fprintf(yyout, "%s %d %d %d\n", customers[custInd], d, m, valInd);
-};
-
-[0-9]+";" {
-    if (state == 2) {
+    if (state == 2 || state == 5) {
         state = 3;
     } else {
         //ignoring
         state = -1;
         continue;
     }
-    int temp = 0;
-    int len = strlen(yytext);
-    len -= 2; //last is ";';
-    int pow = 1;
-    while(len >= 0) {
-        temp = temp + pow * (yytext[len] - '0');
-        pow *= 10;
-        len--;
+
+    int d = (yytext[1] - '0') + 10 * (yytext[0] - '0');
+    int m = (yytext[4] - '0') + 10 * (yytext[3] - '0');
+
+    if (d > 30 || m > 12) {
+        fprintf(yyout, "0\n");
+        exit(0);
     }
+
+    valInd = valsSize[custInd];
+    dds[custInd][valInd] = d;
+    mms[custInd][valInd] = m;
+    //fprintf(yyout, "%s %d %d %d\n", customers[custInd], d, m, valInd);
+};
+
+[0-9]+ {
+    if (state == 3) {
+        state = 4;
+    } else {
+        //ignoring
+        state = -1;
+        continue;
+    }
+    int temp = atoi(yytext);
     valInd = valsSize[custInd];
     vals[custInd][valInd] = temp;
     //fprintf(yyout, "%s %d %d\n", customers[custInd], temp, valInd);
     valsSize[custInd]++;
-}
+};
+
+";" {
+    state = 5;
+};
 
 . ;
 
 \n {
     state = 0;
-}
+};
 
 %%
+
 int yywrap() { 
     return 1;
 }
@@ -148,7 +141,6 @@ int main() {
     int mxVal = -1;
     int mxCust = -1;
 
-
     //fprintf(yyout, "customers %d\n", custSize);
     for (int i = 0; i < custSize; i++) {
         //fprintf(yyout, "%s has %d vals\n", customers[i], valsSize[i]);
@@ -156,9 +148,10 @@ int main() {
             //fprintf(yyout, "{ %d/%d %d } ", dds[i][j], mms[i][j], vals[i][j]);
             if (dds[i][j] == d && mms[i][j] == m) {
                 numvalid++;
-                if (vals[i][j] > mxVal)
+                if (vals[i][j] > mxVal) {
                     mxVal = vals[i][j];
                     mxCust = i;
+                }
             }
         }
         //fprintf(yyout, "\n");
