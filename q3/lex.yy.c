@@ -815,14 +815,15 @@ YY_RULE_SETUP
         fprintf(yyout, "0\n");
         exit(0);
     }
+    valInd = valsSize[custInd];
     dds[custInd][valInd] = d;
     mms[custInd][valInd] = m;
-    //fprintf(yyout, "%d %d. ", d, m);
+    //fprintf(yyout, "%s %d %d %d\n", customers[custInd], d, m, valInd);
 };
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 94 "q3.l"
+#line 95 "q3.l"
 {
     if (state == 2) {
         state = 3;
@@ -841,30 +842,30 @@ YY_RULE_SETUP
         len--;
     }
     valInd = valsSize[custInd];
-    valsSize[custInd]++;
     vals[custInd][valInd] = temp;
-    //fprintf(yyout, "%d ", temp);
+    //fprintf(yyout, "%s %d %d\n", customers[custInd], temp, valInd);
+    valsSize[custInd]++;
 }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 117 "q3.l"
+#line 118 "q3.l"
 ;
 	YY_BREAK
 case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
-#line 119 "q3.l"
+#line 120 "q3.l"
 {
     state = 0;
 }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 123 "q3.l"
+#line 124 "q3.l"
 ECHO;
 	YY_BREAK
-#line 868 "lex.yy.c"
+#line 869 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1869,7 +1870,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 123 "q3.l"
+#line 124 "q3.l"
 
 int yywrap() { 
     return 1;
@@ -1892,9 +1893,28 @@ int main() {
         fprintf(yyout, "0\n");
         exit(0);
     }
-    fprintf(yyout, "%d %d\n", d, m);
-    fprintf(yyout, "customers %d\n", custSize);
+
+    int numvalid = 0;
+    int mxVal = -1;
+    int mxCust = -1;
+
+
+    //fprintf(yyout, "customers %d\n", custSize);
     for (int i = 0; i < custSize; i++) {
-        fprintf(yyout, "%s has %d vals\n", customers[i], valsSize[i]);
+        //fprintf(yyout, "%s has %d vals\n", customers[i], valsSize[i]);
+        for (int j = 0; j < valsSize[i]; j++) {
+            //fprintf(yyout, "{ %d/%d %d } ", dds[i][j], mms[i][j], vals[i][j]);
+            if (dds[i][j] == d && mms[i][j] == m) {
+                numvalid++;
+                if (vals[i][j] > mxVal)
+                    mxVal = vals[i][j];
+                    mxCust = i;
+            }
+        }
+        //fprintf(yyout, "\n");
     }
+    if (numvalid == 0) 
+        fprintf(yyout, "$0$#");
+    else 
+        fprintf(yyout, "$%d$%s#", numvalid, customers[mxCust]);
 }

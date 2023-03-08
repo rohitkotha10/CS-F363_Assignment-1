@@ -1,10 +1,1 @@
-20 11
-customers 8
-ABC123 has 3 vals
-XYZ123 has 3 vals
-Q890 has 1 vals
-X123 has 1 vals
-Y456 has 2 vals
-P89 has 1 vals
-AAA111 has 2 vals
-PQ13 has 3 vals
+$2$XYZ123#

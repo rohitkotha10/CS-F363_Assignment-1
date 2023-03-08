@@ -86,9 +86,10 @@ $(" ")*[A-Z]+[0-9]+ {
         fprintf(yyout, "0\n");
         exit(0);
     }
+    valInd = valsSize[custInd];
     dds[custInd][valInd] = d;
     mms[custInd][valInd] = m;
-    //fprintf(yyout, "%d %d. ", d, m);
+    //fprintf(yyout, "%s %d %d %d\n", customers[custInd], d, m, valInd);
 };
 
 [0-9]+";" {
@@ -109,9 +110,9 @@ $(" ")*[A-Z]+[0-9]+ {
         len--;
     }
     valInd = valsSize[custInd];
-    valsSize[custInd]++;
     vals[custInd][valInd] = temp;
-    //fprintf(yyout, "%d ", temp);
+    //fprintf(yyout, "%s %d %d\n", customers[custInd], temp, valInd);
+    valsSize[custInd]++;
 }
 
 . ;
@@ -142,9 +143,28 @@ int main() {
         fprintf(yyout, "0\n");
         exit(0);
     }
-    fprintf(yyout, "%d %d\n", d, m);
-    fprintf(yyout, "customers %d\n", custSize);
+
+    int numvalid = 0;
+    int mxVal = -1;
+    int mxCust = -1;
+
+
+    //fprintf(yyout, "customers %d\n", custSize);
     for (int i = 0; i < custSize; i++) {
-        fprintf(yyout, "%s has %d vals\n", customers[i], valsSize[i]);
+        //fprintf(yyout, "%s has %d vals\n", customers[i], valsSize[i]);
+        for (int j = 0; j < valsSize[i]; j++) {
+            //fprintf(yyout, "{ %d/%d %d } ", dds[i][j], mms[i][j], vals[i][j]);
+            if (dds[i][j] == d && mms[i][j] == m) {
+                numvalid++;
+                if (vals[i][j] > mxVal)
+                    mxVal = vals[i][j];
+                    mxCust = i;
+            }
+        }
+        //fprintf(yyout, "\n");
     }
+    if (numvalid == 0) 
+        fprintf(yyout, "$0$#");
+    else 
+        fprintf(yyout, "$%d$%s#", numvalid, customers[mxCust]);
 }
