@@ -1,18 +1,18 @@
 {
-    "tasks": [
-      {
-        "type": "shell",
-        "label": "yacc and lex",
-        "command": "lex ${fileBasenameNoExtension}.l;gcc lex.yy.c -ll -w;./a.out",
-        "options": {
-          "cwd": "${fileDirname}"
-        },
-        "problemMatcher": [],
-        "group": {
-          "kind": "build",
-          "isDefault": true
-        }
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "flex only",
+      "command": "flex ${fileBasenameNoExtension}.l;gcc lex.yy.c -w",
+      "options": {
+        "cwd": "${fileDirname}"
+      },
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
       }
-    ],
-    "version": "2.0.0"
-  }
+    }
+  ],
+  "version": "2.0.0"
+}
